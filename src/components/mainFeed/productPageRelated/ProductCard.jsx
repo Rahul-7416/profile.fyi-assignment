@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { modifyItems } from '../../../store/cartItemsSlice.js';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../../../constants/constants.js';
+import { toast } from 'react-toastify';
 
 function ProductCard({ product }) {
     const dispatch = useDispatch();
@@ -43,7 +44,10 @@ function ProductCard({ product }) {
                 // Update the Redux store with the new product added to the cart
                 const updatedItems = [...currentAllItems, data.data];
                 dispatch(modifyItems({ allItems: updatedItems, itemId: product.id }));
-                console.log(updatedItems);
+                // console.log(updatedItems);
+                toast("Product added to the cart", {
+                    position: "bottom-center"
+                });
             } else {
                 // Handle errors
                 const errorData = await response.json();
@@ -73,14 +77,14 @@ function ProductCard({ product }) {
                 <div
                     className='flex items-center gap-3'
                 >
-                    <p className='text-green-500 font-bold'>${(product.price - discount).toFixed(2)}</p>
-                    <p className='text-red-500 line-through'>${product.price}</p>
+                    <p className='text-green-500 font-bold'>₹{(product.price - discount).toFixed(2)}</p>
+                    <p className='text-red-500 line-through'>₹{product.price}</p>
                 </div>
                 <div
                     className='flex items-center gap-3'
                 >
                     <p className=''>Discount:&#160;</p>
-                    <p className='text-green-500 font-semibold'>${discount}</p>
+                    <p className='text-green-500 font-semibold'>₹{discount}</p>
                 </div>
                 <div className='flex gap-1 items-center'>
                     <p>{product.rating.rate}</p>

@@ -3,6 +3,7 @@ import { RiStarSFill } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
 import { updateQuantity, removeItem } from '../../../store/cartItemsSlice.js';
 import { BASE_URL } from '../../../constants/constants.js';
+import { toast } from 'react-toastify';
 
 function CartItem({ product }) {
     const [counter, setCounter] = useState(product.quantity || 1); // Initialize with product quantity -> intially it will be 1
@@ -34,7 +35,9 @@ function CartItem({ product }) {
                 console.error('Error updating product:', error);
             }
         } else {
-            alert('Cannot reduce below 1');
+            toast("Cannot reduce below 1", {
+                position: "bottom-center"
+            })
         }
     };
 
@@ -64,7 +67,9 @@ function CartItem({ product }) {
                 console.error('Error updating product:', error);
             }
         } else {
-            alert('Maximum quantity reached');
+            toast("Maximum quantity reached", {
+                position: "bottom-center"
+            })
         }
     };
 
@@ -87,6 +92,9 @@ function CartItem({ product }) {
 
             const data = await response.json();
             dispatch(removeItem({ itemId: product.id }));
+            toast("Item removed from the cart", {
+                position: "bottom-center"
+            })
         } catch (error) {
             console.error('Error removing product:', error);
         }
@@ -102,10 +110,10 @@ function CartItem({ product }) {
             <div className='flex flex-col gap-2 w-full'>
                 <p className='text-sm md:text-base'>{product.title}</p>
                 <div className='flex gap-2 text-sm md:text-base'>
-                    <p className='line-through text-gray-500'>${product.price.toFixed(2)}</p>
-                    <p>${(product.price - product.discount).toFixed(2)}</p>
+                    <p className='line-through text-gray-500'>₹{product.price.toFixed(2)}</p>
+                    <p>₹{(product.price - product.discount).toFixed(2)}</p>
                 </div>
-                <p className='text-sm md:text-base text-green-600'>${product.discount} saved</p>
+                <p className='text-sm md:text-base text-green-600'>₹{product.discount} saved</p>
                 <div className='flex gap-1 items-center'>
                     <p className='text-sm md:text-base'>{product.rating.rate}</p>
                     <RiStarSFill className='w-5 h-5 text-yellow-500' />

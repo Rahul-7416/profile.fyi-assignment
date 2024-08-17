@@ -21,18 +21,18 @@ function PriceDetail() {
             </div>
             <div className='flex justify-between text-lg'>
                 <span>Price ({totalItems} {totalItems === 1 ? 'item' : 'items'})</span>
-                <span>${totalCost.toFixed(2)}</span>
+                <span>₹{totalCost.toFixed(2)}</span>
             </div>
             <div className='flex justify-between text-lg'>
                 <span>Discount</span>
-                <span className='text-green-600'>- ${totalDiscount.toFixed(2)}</span>
+                <span className='text-green-600'>- ₹{totalDiscount.toFixed(2)}</span>
             </div>
             <div className='flex justify-between text-lg font-semibold border-t-2 border-b-2 border-dashed py-2'>
                 <span>Total Amount</span>
-                <span>${(totalCost - totalDiscount).toFixed(2)}</span>
+                <span>₹{(totalCost - totalDiscount).toFixed(2)}</span>
             </div>
             <div className='text-lg font-semibold text-green-600'>
-                <p>You will save ${totalDiscount.toFixed(2)} on this order</p>
+                <p>You will save ₹{totalDiscount.toFixed(2)} on this order</p>
             </div>
         </div>
     );
