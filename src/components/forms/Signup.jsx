@@ -77,7 +77,7 @@ function Signup() {
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-black text-sm font-bold mb-2" htmlFor="fullname">
-                Full Name
+                Full Name*
               </label>
               <input
                 type="text"
@@ -85,6 +85,7 @@ function Signup() {
                 name='fullname'
                 onChange={handleChange}
                 required
+                placeholder='Rahul Kumar'
                 className="w-full px-3 py-2 text-black border rounded-lg focus:outline-none focus:border-blue-500"
               />
             </div>
@@ -98,6 +99,7 @@ function Signup() {
                 name='email'
                 onChange={handleChange}
                 required
+                placeholder='example@mail.com'
                 className="w-full px-3 py-2 text-black border rounded-lg focus:outline-none focus:border-blue-500"
               />
             </div>
@@ -111,6 +113,7 @@ function Signup() {
                 name='password'
                 onChange={handleChange}
                 required
+                placeholder='set a password'
                 className="w-full px-3 py-2 text-black border rounded-lg focus:outline-none focus:border-blue-500"
               />
             </div>

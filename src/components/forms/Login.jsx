@@ -104,26 +104,28 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-black text-sm font-bold mb-2" htmlFor="email">
-              Email
+              Email*
             </label>
             <input
               type="email"
               id="email"
               name='email'
               onChange={handleChange}
+              placeholder='example@mail.com'
               required
               className="w-full px-3 py-2 text-black border rounded-lg focus:outline-none focus:border-blue-500"
             />
           </div>
           <div className="mb-6">
             <label className="block text-black text-sm font-bold mb-2" htmlFor="password">
-              Password
+              Password*
             </label>
             <input
               type="password"
               id="password"
               name='password'
               onChange={handleChange}
+              placeholder='your password'
               required
               className="w-full px-3 py-2 text-black border rounded-lg focus:outline-none focus:border-blue-500"
             />
