@@ -34,6 +34,11 @@ function PriceDetail() {
             <div className='text-lg font-semibold text-green-600'>
                 <p>You will save ₹{totalDiscount.toFixed(2)} on this order</p>
             </div>
+            <button
+                className='p-3 w-full rounded-sm bg-yellow-400'
+            >
+                Place Order
+            </button>
         </div>
     );
 }
