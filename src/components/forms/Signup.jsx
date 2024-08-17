@@ -91,7 +91,7 @@ function Signup() {
             </div>
             <div className="mb-4">
               <label className="block text-black text-sm font-bold mb-2" htmlFor="email">
-                Email
+                Email*
               </label>
               <input
                 type="email"
@@ -105,7 +105,7 @@ function Signup() {
             </div>
             <div className="mb-6">
               <label className="block text-black text-sm font-bold mb-2" htmlFor="password">
-                Password
+                Password*
               </label>
               <input
                 type="password"
