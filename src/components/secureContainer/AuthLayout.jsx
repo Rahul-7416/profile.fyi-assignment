@@ -10,9 +10,9 @@ export default function AuthLayout({children, authentication = false}) {
     quantum.register();
 
     useEffect(() => {
-        if (authentication && !authStatus) {
+        if (authentication && (authStatus !== authentication)){
             navigate('/login');
-        } else if (!authentication && authStatus) {
+        } else if (!authentication && authStatus !== authentication) {
             navigate('/');
         }
         setLoader(false);
