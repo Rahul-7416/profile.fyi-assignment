@@ -17,7 +17,6 @@ function ProductCard({ product }) {
         event.preventDefault();
     
         try {
-            // Send a POST request to the backend to add the product to the cart
             const response = await fetch(`${BASE_URL}/api/v1/products/add-product`, {
                 method: 'POST',
                 headers: {
@@ -37,19 +36,14 @@ function ProductCard({ product }) {
                 credentials: 'include'
             });
     
-            // Check if the response is okay (status 201)
             if (response.ok) {
                 const data = await response.json();
-    
-                // Update the Redux store with the new product added to the cart
                 const updatedItems = [...currentAllItems, data.data];
                 dispatch(modifyItems({ allItems: updatedItems, itemId: product.id }));
-                // console.log(updatedItems);
                 toast("Product added to the cart", {
                     position: "bottom-center"
                 });
             } else {
-                // Handle errors
                 const errorData = await response.json();
                 console.error("Error adding product to cart:", errorData.message);
             }
@@ -64,26 +58,43 @@ function ProductCard({ product }) {
 
     return (
         <div
-            className={`w-[250px] bg-white p-2 sm:hover:shadow-xl rounded-lg cursor-pointer overflow-hidden transition-all duration-300
-                ${isHovered ? 'h-auto' : 'h-[350px]'} sm:w-[220px] md:w-[180px] lg:w-[250px]`}
+            className={`relative w-[300px] h-[450px] border-2 bg-white p-2 sm:hover:shadow-xl rounded-lg cursor-pointer overflow-hidden transition-all duration-300`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
             <div className='p-1 h-[250px]'>
                 <img src={product.image} className='block h-full w-full object-contain mx-auto' />
-            </div>
-            <div className={`px-8 py-2 flex flex-col items-start gap-1 transition-transform duration-300 ${isHovered ? 'translate-y-0' : 'translate-y-full'}`}>
-                <p className="">{product.title}</p>
                 <div
-                    className='flex items-center gap-3'
+                    className='mt-6 px-8 py-2 flex flex-col gap-2'
                 >
+                    <p className="font-semibold">{product.title.substring(0,35)}...</p>
+                <div className='flex items-center gap-3'>
                     <p className='text-green-500 font-bold'>₹{(product.price - discount).toFixed(2)}</p>
                     <p className='text-red-500 line-through'>₹{product.price}</p>
                 </div>
-                <div
-                    className='flex items-center gap-3'
-                >
-                    <p className=''>Discount:&#160;</p>
+                <div className='flex items-center gap-3'>
+                    <p>Discount:&#160;</p>
+                    <p className='text-green-500 font-semibold'>₹{discount}</p>
+                </div>
+                <div className='flex gap-1 items-center'>
+                    <p>{product.rating.rate}</p>
+                    <RiStarSFill className='w-5 h-5' />
+                </div>
+                
+            </div>
+            </div>
+            <div
+                className={`absolute bottom-0 left-0 w-full bg-white px-8 py-2 flex flex-col items-start gap-1 transition-transform duration-300 
+                            ${isHovered ? 'translate-y-0' : 'translate-y-0 sm:translate-y-full'}`}
+            >
+
+                <p className="font-semibold">{product.title}</p>
+                <div className='flex items-center gap-3'>
+                    <p className='text-green-500 font-bold'>₹{(product.price - discount).toFixed(2)}</p>
+                    <p className='text-red-500 line-through'>₹{product.price}</p>
+                </div>
+                <div className='flex items-center gap-3'>
+                    <p>Discount:&#160;</p>
                     <p className='text-green-500 font-semibold'>₹{discount}</p>
                 </div>
                 <div className='flex gap-1 items-center'>
@@ -93,7 +104,7 @@ function ProductCard({ product }) {
                 {
                     addedToCart ? (
                         <Link to={'/cart'}>
-                            <button className='p-2 rounded-md self-center flex gap-1 items-center mt-2 bg-red-400 border-2 border-red-400 sm:hover:bg-red-100'>
+                            <button className='p-2 rounded-md self-center flex gap-1 items-center mt-2 ml-14 bg-red-400 border-2 border-red-400 sm:hover:bg-red-100'>
                                 <FaCartShopping className='w-5 h-5' />
                                 <p>Go to Cart</p>
                             </button>
