@@ -36,7 +36,7 @@ function Login() {
     }
 
     try {
-        toast.info("Please wait for a few seconds...", {
+        toast.info("Now, please wait for a few seconds, we are verifying the data provided...", {
           position: "bottom-center"
         });
         const response = await fetch(url, {
