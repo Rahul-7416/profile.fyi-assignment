@@ -36,6 +36,9 @@ function Login() {
     }
 
     try {
+        toast.info("Please wait for a few seconds...", {
+          position: "bottom-center"
+        });
         const response = await fetch(url, {
             method: "POST",
             headers: {
@@ -53,9 +56,6 @@ function Login() {
         const responseObj = await response.json();
 
         if (responseObj.statusCode === 200) {
-            toast.info("Please wait for a few seconds...", {
-              position: "bottom-center"
-            })
             const userData = responseObj?.data?.user;
             dispatch(login({userData}));
 
